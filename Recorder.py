@@ -1,4 +1,4 @@
-#just some testing driver code for now
+#Creates a virtual camera that OBS can use to record data
 import cv2
 from DataProcessing import segmentMouth
 import DataProcessing
@@ -29,6 +29,9 @@ with pyvirtualcam.Camera(width=IMG_WIDTH, height=IMG_HEIGHT, fps=20) as cam:
                 gray = np.stack((gray,)*3, axis=-1)
 
                 cam.send(gray)
+            else:
+                cam.send(np.zeros((IMG_WIDTH, IMG_HEIGHT, 3)))
+            cam.sleep_until_next_frame()
 
 vid.release()
 cv2.destroyAllWindows()
