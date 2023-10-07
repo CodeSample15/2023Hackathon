@@ -12,7 +12,7 @@ IMG_HEIGHT = 128
 vid = cv2.VideoCapture(0)
 
 print("Starting virtual camera...")
-with pyvirtualcam.Camera(width=IMG_WIDTH, height=IMG_HEIGHT, fps=20) as cam:
+with pyvirtualcam.Camera(width=IMG_WIDTH, height=IMG_HEIGHT, fps=30) as cam:
     while(True):
         ret, frame = vid.read()
     

@@ -4,7 +4,6 @@
 import cv2
 import mediapipe as mp
 import numpy as np
-import shutup; shutup.please()
 
 import keyboard
 import time
