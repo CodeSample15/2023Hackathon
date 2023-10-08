@@ -6,6 +6,15 @@ import os, sys
 import numpy as np
 from threading import Thread
 import json
+from tensorflow.keras.models import load_model
+import shutil
+import os
+from pydub import AudioSegment
+from PIL import Image
+import DataProcessing
+from DataProcessing import segmentMouth
+import threading
+import time
 
 app = Flask(__name__, template_folder='./templates')
 camera = cv2.VideoCapture(0)
