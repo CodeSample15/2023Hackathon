@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Neil Gandhi</title>
+    <link rel="stylesheet" href="..\static\styles.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div class="Navigation">
+      <nav>
+        <li><a href="/">Home</a></li>
+        <li><a href="about">About Me</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="contact.html">Contact Me</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </nav>
+      <a class="cta" href="#"><button>Resume</button></a>
+    </div>
+
+    <header class="home">
+      <h1>Hello, I'm <span class="lastword">Hermes.</span></h1>
+      <p class="phrase">reconstructing sound from mouth movement</p>
+      <video id="background-video" autoplay loop muted>
+        <source src="{{url_for('static', filename='photos/rome.mp4')}}" type="video/mp4" />
+
+      </video>
+    </header>
+    <div id="wrapper">
+      <main>
+        <div>
+          <img src="{{ url_for('video' )}}" width="300px"
+          style=
+          "background-size: 100% 100%;
+          background-repeat: no-repeat;
+          margin: auto;
+          display: block;
+          border-radius: 5%;"
+          />
+
+          <div class="control-panel">
+            <button class="button" >
+              <strong>Start Recording</strong>
+            </button>
+            <button class="button" >
+              <strong>Stop Recording</strong>
+            </button>
+            <button class="button" >
+              <strong>Play Output</strong>
+            </button>
+            <button class="button" >
+              <strong>Download</strong>
+            </button>
+          </div>
+      </main>
+      <footer>   
+      </footer>
+    </div>
+  </body>
+</html>
