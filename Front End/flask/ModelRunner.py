@@ -41,11 +41,11 @@ class Recorder:
                 segmentMouth(frame, img_width=self.im_size, img_height=self.im_size)
                 processed_frame = DataProcessing.processed
                 if not np.array_equal(processed_frame, np.zeros((1, 1, 1))):
+                    if hidden_preview:
+                        self.preview = processed_frame
                     gray = cv2.cvtColor(processed_frame, cv2.COLOR_BGR2GRAY)
                     if preview:
                         cv2.imshow('preview', gray)
-                    if hidden_preview:
-                        self.preview = gray
 
                     self.frames.append(gray)
             cv2.waitKey(1)

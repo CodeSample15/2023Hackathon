@@ -14,7 +14,7 @@ FaceLandmarkerOptions = mp.tasks.vision.FaceLandmarkerOptions
 FaceLandmarkerResult = mp.tasks.vision.FaceLandmarkerResult
 VisionRunningMode = mp.tasks.vision.RunningMode
 
-model_path = "MPModel/face_landmarker.task"
+model_path = "../../MPModel/face_landmarker.task"
 
 processed = np.zeros((1, 1, 1))
 in_image_dims = [0,0]
