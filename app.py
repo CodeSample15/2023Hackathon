@@ -17,7 +17,7 @@ def generate_frames():
 
 @app.route('/')
 def index():
-    return render_template('Simple Front End/index.html')
+    return render_template('/Simple Front End/index.html')
 
 @app.route('/video')
 def video():
