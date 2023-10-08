@@ -21,6 +21,7 @@ class Recorder:
         self.frames = []
         self.r_thread = threading.Thread(target=self.recording_thread)
         self.im_size = image_size
+        self.preview = np.zeros((image_size, image_size, 1))
 
     def clear_frames(self):
         self.frames = []
@@ -30,7 +31,7 @@ class Recorder:
         temp = np.reshape(temp, (temp.shape[0], temp.shape[1], temp.shape[2], 1))
         return temp
 
-    def recording_thread(self, preview=False):
+    def recording_thread(self, preview=False, hidden_preview=False):
         vid = cv2.VideoCapture(0)
         vid.set(cv2.CAP_PROP_FPS, self.fps)
 
@@ -43,6 +44,8 @@ class Recorder:
                     gray = cv2.cvtColor(processed_frame, cv2.COLOR_BGR2GRAY)
                     if preview:
                         cv2.imshow('preview', gray)
+                    if hidden_preview:
+                        self.preview = gray
 
                     self.frames.append(gray)
             cv2.waitKey(1)
@@ -51,11 +54,11 @@ class Recorder:
         cv2.destroyAllWindows()
                 
 
-    def start_recording(self, preview=False):
+    def start_recording(self, preview=False, hidden_preview=False):
         if not self.recording:
             self.frames = []
             self.recording = True
-            self.r_thread = threading.Thread(target=self.recording_thread, args=(preview,))
+            self.r_thread = threading.Thread(target=self.recording_thread, args=(preview,hidden_preview))
             self.r_thread.start()
 
     def stop_recording(self):
