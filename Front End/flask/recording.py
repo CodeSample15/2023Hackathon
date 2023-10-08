@@ -3,7 +3,6 @@ import cv2
 from DataProcessing import segmentMouth
 import DataProcessing
 import numpy as np
-import pyvirtualcam
 
 IMG_WIDTH = 128
 IMG_HEIGHT = 128

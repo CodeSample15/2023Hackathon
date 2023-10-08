@@ -106,16 +106,19 @@ h1{
 
 .control-panel{
   margin-top: 2%;
+  width: 80%;
+  margin-left: 10%;
   display:flex;
-  
   justify-content: space-evenly;
+}
 
+.control-panel * {
+  border-radius: 15px;
 }
 
 .button{
   display:flex;
   background-color: rgb(43, 58, 68);
-  border-radius: 5px;
   border: none;
   color: white;
   font-size: large;

@@ -10,10 +10,6 @@
       <nav>
         <li><a href="/">Home</a></li>
         <li><a href="about">About Me</a></li>
-        <li><a href="work.html">Work</a></li>
-        <li><a href="contact.html">Contact Me</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="resume.pdf" target="_blank">Resume</a></li>
       </nav>
       <a class="cta" href="#"><button>Resume</button></a>
     </div>
@@ -35,23 +31,15 @@
           background-repeat: no-repeat;
           margin: auto;
           display: block;
-          border-radius: 5%;"
-          />
-
-          <div class="control-panel">
-            <button class="button" >
-              <strong>Start Recording</strong>
-            </button>
-            <button class="button" >
-              <strong>Stop Recording</strong>
-            </button>
-            <button class="button" >
-              <strong>Play Output</strong>
-            </button>
-            <button class="button" >
-              <strong>Download</strong>
-            </button>
-          </div>
+          border-radius: 5%;"/>          
+         
+           <form class="control-panel" method="post" action="{{ url_for('tasks') }}">
+            <input class="button" type="submit" value="Stop/Start" name="stop" style="border-radius: 8px;" />
+            <input class="button" type="submit" value="Start/Stop Recording" name="rec" style="border-radius: 8px;" />
+            <input class="button" type="submit" value="Play Output" name="output" style="border-radius: 8px;"/>
+            <input class="button" type="submit" value="Download" name="load" style="border-radius: 8px;">
+        </form>
+         
       </main>
       <footer>   
       </footer>
