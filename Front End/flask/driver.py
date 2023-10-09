@@ -17,19 +17,23 @@ import time
 app = Flask(__name__)
 
 recorder = Recorder()
+recorder.start_recording(hidden_preview=True)
 #runner = Runner(model_path='../../Machine Learning/Models/v3.keras', input_frame_count=20)
 recording = False
 
 def gen_frames():  # generate frame by frame from camera
-    global out, capture, rec_frame, recorder
+    global recorder
+    
     while True:
         if not recording:
             recorder.clear_frames()
-        frame = recorder.preview
-        ret,buffer=cv2.imencode('.jpg',frame)
-        frame = buffer.tobytes()
+        temp = recorder.preview
+        if not np.array_equal(temp, np.zeros((1, 1, 1))):
+            temp = cv2.resize(temp, (500, 500), interpolation=cv2.INTER_AREA)
+            ret,buffer=cv2.imencode('.jpg', temp)
+            frame = buffer.tobytes()
 
-        yield(b'--frame\r\n'
+            yield (b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/')
@@ -39,17 +43,6 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-def generate_frames():
-    while True:
-        success, frame=camera.read()
-        if not success:
-            break
-        else:
-            ret, buffer=cv2.imencode('.jpg', frame)
-            frame=buffer.tobytes()
-        yield(b'--frame\r\n'
-              b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
             
 @app.route('/video')
 def video():
@@ -98,5 +91,4 @@ def tasks():
 
 
 if __name__ == "__main__":
-    recorder.start_recording(preview=True, hidden_preview=True)
     app.run(debug=True)

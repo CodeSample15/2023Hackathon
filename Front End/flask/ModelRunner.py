@@ -42,7 +42,7 @@ class Recorder:
                 processed_frame = DataProcessing.processed
                 if not np.array_equal(processed_frame, np.zeros((1, 1, 1))):
                     if hidden_preview:
-                        self.preview = processed_frame
+                        self.preview = frame
                     gray = cv2.cvtColor(processed_frame, cv2.COLOR_BGR2GRAY)
                     if preview:
                         cv2.imshow('preview', gray)
