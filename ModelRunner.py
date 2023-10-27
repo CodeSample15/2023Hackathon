@@ -29,6 +29,7 @@ class Recorder:
     def export_frames(self):
         temp = np.array(self.frames)
         temp = np.reshape(temp, (temp.shape[0], temp.shape[1], temp.shape[2], 1))
+        temp = temp.astype('float32')
         return temp
 
     def recording_thread(self, preview=False, hidden_preview=False):
@@ -84,7 +85,7 @@ class Runner:
             raise Exception(f"Frames must be 1 channel only, got {frames.shape[3]} channels.")
         temp_file = 'temp/'
 
-        frames /= 255
+        frames /= 255.0
 
         if os.path.isdir(temp_file):
             shutil.rmtree(temp_file)
@@ -96,7 +97,7 @@ class Runner:
         for i in tqdm(range(divs)):
             index = i*self.input_frame_count
             x = frames[index:index+self.input_frame_count]
-            x = np.reshape(x, (x.shape[0], 1, x.shape[1], x.shape[2], x.shape[3]))
+            x = np.reshape(x, (1, x.shape[0], x.shape[1], x.shape[2], x.shape[3]))
 
             pred = self.model.predict(x, verbose=0)[0] * 255
             #pred = np.reshape(pred, (pred.shape[0], pred.shape[1]))
@@ -132,4 +133,5 @@ if __name__ == '__main__':
 
     test.stop_recording()
 
-    print(test.export_frames().shape)
+    run = Runner('Generator.h5', input_frame_count=20)
+    run.run(test.export_frames())
